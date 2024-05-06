@@ -2,14 +2,12 @@ import TodoItem from "./Todo";
 
 function TodoView(props) {
     return(
-        <div>
-            <ul>
+            <ul className="list-group mb-2">
                 {
                     props.todos.map(todo =>
-                    <TodoItem key={todo.id} todo= { todo } />
+                    <TodoItem key={todo.id} todo= { todo } onEditClick={props.onEditClick} onDeleteClick={props.onDeleteClick}/>
                )}
             </ul>
-        </div>
     )
 }
 

@@ -6,7 +6,16 @@
 }
 
 .listGroup {
-  width: 400px;
+  width: 500px;
+  height: 500px;
   background-color: white;
   margin-top: 15px;
+  text-align: center;
+}
+#error-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
