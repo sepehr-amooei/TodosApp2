@@ -8,8 +8,8 @@ import TodoView from "./components/todoListView";
 function App() {
     const [todoList, setTodoList] = useState([{}]);
     const [todo, setTodo] = useState({});
-    const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
+    const [title, setTitle] = useState('title');
+    const [description, setDescription] = useState('discription');
     const [priority, setSelectedPriority] = useState(1);
     const [complete, setSelectedComplete] = useState(false);
 
@@ -17,7 +17,7 @@ function App() {
     axios.get('http://127.0.0.1:8000/todos').then(res => {
         setTodoList(res.data)
     })
-}, [todo]);
+}, [todo, priority]);
     const deleteTodoHandler = (id) => {
         axios.delete(`http://127.0.0.1:8000/todo/${id}`)
             .then((response) => {
@@ -27,7 +27,7 @@ function App() {
     }
 
     const addTodoHandler = () => {
-        setTodo({"title": title, 'description': description, "priority": priority, "complete": complete})
+        setTodo({"title": title, 'description': description, "priority": priority, "complete": false})
         axios.post('http://127.0.0.1:8000/todo',todo
             )
             .then(res => {
@@ -61,24 +61,14 @@ function App() {
                         <label className="input-group-text" htmlFor="inputGroupSelect01">Priority</label>
                       </div>
                       <select className="custom-select" id="inputGroupSelect01" style={{"width": "130px"}}
-                              onChange={handlePriorityChange} value={priority}>
+                              onChange={handlePriorityChange}>
+                          <option>Choose</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
                         <option value="4">4</option>
                         <option value="5">5</option>
                       </select>
-                      <select className="custom-select" id="inputGroupSelect02"
-                              style={{"width": "150px", "marginLeft": "10px"}}
-                              onChange={handleCompleteChange} value={complete}>
-                              >
-                        <option value="false">No</option>
-                        <option value="true">Yes</option>
-
-                      </select>
-                      <div className="input-group-append">
-                        <label className="input-group-text" htmlFor="inputGroupSelect02">Complete</label>
-                      </div>
                     </div>
                     <button className="btn btn-outline-primary mx-2 mb-4" style={{
                         "borderRadius": "50px",
